@@ -79,6 +79,19 @@ I made separate nets for the grounds and power rails of each board. To protect a
 
 **Total time spent: 3h**
 
+# November 2, 2026: test
+<!-- fabricate:entry 1847 -->
+
+I realized that my board was becoming very complex. If I made a mistake when designing the board, I would have to respin the whole board. If I fried the board, everything would have to be replaced. So, I decided to split my design into three PCBs: a power distribution board, a pneumatics board and a board for the Pico and stepper motors. I added connectors on the Pico board for the unused I/O for a possible 4th board for the feeders.
+
+I made separate nets for the grounds and power rails of each board. To protect against ESD, I added the PS5915-S26, a TVS diode array which will be placed in series with each I/O line close to the connectors and clamp the voltage through them. Since the Pico's 3V3 pin is for output only, I replaced the 3.3V regulator with a 5V one so that the Pico is powered thru VSYS and its internal regulator supplies 3.3V to the rest of the circuit. This also lets me add a schottky diode to protect the Pico from reverse polarity.
+
+![5V regulator](https://fabricate.hackclub-assets.com/58b7d514fb4f53e36c3562ea2ecb1d2609a20de9e5c7c163e401755ab338d67a/image-png/image.png)
+![24V distribution with fuses for each board](https://fabricate.hackclub-assets.com/5fb0e4a7fd02245086508b696e496784ab42d6086e3a2222633e107430a931a7/image-png/Screenshot%202026-11-02%20100957.png)
+![Updated Pico wiring with ESD protection](https://fabricate.hackclub-assets.com/681868591ef0e755ac9b29e7bb6a50cde65aea55686990aacb32047648adc071/image-png/Screenshot%202026-11-02%20101019.png)
+
+**Total time spent: 3h**
+
 # November 2, 2026 (entry 2): PCB routing part 1
 <!-- fabricate:entry 1848 -->
 
