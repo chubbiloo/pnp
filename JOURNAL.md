@@ -83,7 +83,7 @@ I made separate nets for the grounds and power rails of each board. To protect a
 
 To control each vacuum pump, two circuits are needed, one to switch on/off power to the pump itself and another to the solenoid. I realized that since both are just loads, I could use the same design for both circuits. I took some inspiration from the [Starfish](https://blog.thea.codes/starfish-a-control-board-with-the-rp2040/#qwiic-sch:D403) PNP board in my design. I am using a N-channel MOSFET (2N7002) and a P-channel MOSFET (AO7401A), as well as a flyback diode across the terminals of the load. When the N-FET's gate is pulled low, the P-FET's gate voltage is the same as its source voltage, so no current can flow through it. When the N-FET is pulled high, a second path to ground is opened. The two 10k resistors divide the P-FET's input voltage to 12V, allowing current to flow through from the P-FET's source to drain.
 
-**Total time spent: 2.5h**
+**Total time spent: 2h 30min**
 
 # November 2, 2026 (entry 2): PCB routing part 1
 <!-- fabricate:entry 1848 -->
