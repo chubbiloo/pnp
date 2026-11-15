@@ -66,7 +66,7 @@ In addition to the circuit, I also added a 7.5A automotive fuse and TVS diodes t
 
 **Total time spent: 3h**
 
-# November 2, 2026: Board architecture changes
+# November 1, 2026: Board architecture changes
 <!-- fabricate:entry 1847 -->
 
 I realized that my board was becoming very complex. If I made a mistake when designing the board, I would have to respin the whole board. If I fried the board, everything would have to be replaced. So, I decided to split my design into three PCBs: a power distribution board, a pneumatics board and a board for the Pico and stepper motors. I added connectors on the Pico board for the unused I/O for a possible 4th board for the feeders.
@@ -79,11 +79,11 @@ I made separate nets for the grounds and power rails of each board. To protect a
 
 **Total time spent: 3h**
 
-# November 2, 2026: test
+# November 2, 2026: Schematic part 3
 
-I realized that my board was becoming very complex. If I made a mistake when designing the board, I would have to respin the whole board. If I fried the board, everything would have to be replaced. So, I decided to split my design into three PCBs: a power distribution board, a pneumatics board and a board for the Pico and stepper motors. I added connectors on the Pico board for the unused I/O for a possible 4th board for the feeders.
+To control each vacuum pump, two circuits are needed, one to switch on/off power to the pump itself and another to the solenoid. I realized that since both are just loads, I could use the same design for both circuits. I took some inspiration from the [Starfish](https://blog.thea.codes/starfish-a-control-board-with-the-rp2040/#qwiic-sch:D403) PNP board in my design. I am using a N-channel MOSFET (2N7002) and a P-channel MOSFET (AO7401A), as well as a flyback diode across the terminals of the load. When the N-FET's gate is pulled low, the P-FET's gate voltage is the same as its source voltage, so no current can flow through it. When the N-FET is pulled high, a second path to ground is opened. The two 10k resistors divide the P-FET's input voltage to 12V, allowing current to flow through from the P-FET's source to drain.
 
-**Total time spent: 3h**
+**Total time spent: 2.5h**
 
 # November 2, 2026 (entry 2): PCB routing part 1
 <!-- fabricate:entry 1848 -->
