@@ -3,7 +3,7 @@ title: "Pick and Place Machine"
 github: "https://github.com/chubbiloo/pnp"
 description: "5-axis pick and place machine, capable of picking and placing surface mounted parts on a PCB.\n"
 created_at: "2026-10-06"
-total_time: "33h 30m"
+total_time: "37h"
 ---
 
 # October 6, 2026: Selected components for mainboard
@@ -142,14 +142,36 @@ Routed the rest of the pneumatics board, including the pressure sensors, the ADC
 
 **Total time spent: 2h 30m**
 
-# November 19, 2026 (entry 2): Widened traces and ran DRC
+# November 19, 2026 (entry 2): PCB routing part 6
+<!-- fabricate:entry 3476 -->
+
+Routed the power board. Due to the high fuse current of 7.5A, I used pours instead of traces for the main power rail. I realized that my shunt resistor and ferrite beads were too small to carry enough current, so I selected larger parts, a 2512 for the resistor and 1612 for the bead. I found that I had missed a decimal place when calculating the shunt's resistance, it should be 0.006 not 0.062 ohms.
+
+![](https://fabricate.hackclub-assets.com/63d3d17b50d91a15904251c816eff6d08f414556b9b02659bf8d029c14e1f506/image-png/Screenshot%202026-11-15%20013216.png)
+
+**Total time spent: 2h**
+
+# November 19, 2026 (entry 3): Widened traces and ran DRC
 <!-- fabricate:entry 3474 -->
 
-When routing the pneumatics board, I used an online calculator to find how wide my traces needed to be, based on the trip current for the board's fuse. I realized that the +24V trace on the Pico board was too narrow, so I widened it by shifting the stepper motor drivers downwards to make more space for the trace, and tapering the traces at the first few pads as it was too wide.
+When routing the pneumatics and power boards, I used an online calculator to find how wide my traces needed to be, based on the trip current for the board's fuse. I realized that the +24V trace on the Pico board was too narrow, so I widened it by shifting the stepper motor drivers downwards to make more space for the trace, and tapering the traces at the first few pads as it was too wide.
 
 After that, I ran DRC and corrected the errors. Most errors were interference errors caused by footprints being too close to each other or traces. There is a clearance error regarding the LTC4368CMS which can't be fixed as its pads are closer together than the KiCad default clearance (0.15mm vs 0.2mm). JLCPCB's minimum clearance is 0.15mm, so this should still be manufacturable.
 
 ![](https://fabricate.hackclub-assets.com/28899e5c3e5131ee046c1c4f889ee1ed6e2b1f1704f6095633cc99069f8cdfad/image-png/image.png)
 
 **Total time spent: 1h 30m**
+
+# November 19, 2026 (entry 4): Started frame CAD
+<!-- fabricate:entry 3478 -->
+
+Decided to use 2040 extrusion for the frame. Imported a profile for the extrusion, and cadded frame. Using a variable studio to keep the frame parametric. Also imported some other parts (stepper, brackets, GT2 pulley and parametric linear rails).
+
+![](https://fabricate.hackclub-assets.com/fc6bdbc7f49606e20756882f8df21f32e8709cd773b16fdef686896974f879f6/image-png/image.png)
+![](https://fabricate.hackclub-assets.com/2cb9d6a71b72e3906017e9781c5a691b46adf162f0f56cb7a72ae31805ad6b6d/image-png/image.png)
+![](https://fabricate.hackclub-assets.com/8c80da68729e983c2b3980fbe8802fbda67208e144917d97676897e32ac889a9/image-png/image.png)
+
+**Total time spent: 1h 30m**
+
+
 
