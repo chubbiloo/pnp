@@ -3,7 +3,7 @@ title: "Pick and Place Machine"
 github: "https://github.com/chubbiloo/pnp"
 description: "5-axis pick and place machine, capable of picking and placing surface mounted parts on a PCB.\n"
 created_at: "2026-10-06"
-total_time: "26h"
+total_time: "33h 30m"
 ---
 
 # October 6, 2026: Selected components for mainboard
@@ -79,11 +79,18 @@ I made separate nets for the grounds and power rails of each board. To protect a
 
 **Total time spent: 3h**
 
-# November 2, 2026: Schematic part 3
+# November 2, 2026: Schematic part 4
+<!-- fabricate:entry 3036 -->
 
 To control each vacuum pump, two circuits are needed, one to switch on/off power to the pump itself and another to the solenoid. I realized that since both are just loads, I could use the same design for both circuits. I took some inspiration from the [Starfish](https://blog.thea.codes/starfish-a-control-board-with-the-rp2040/#qwiic-sch:D403) PNP board in my design. I am using a N-channel MOSFET (2N7002) and a P-channel MOSFET (AO7401A), as well as a flyback diode across the terminals of the load. When the N-FET's gate is pulled low, the P-FET's gate voltage is the same as its source voltage, so no current can flow through it. When the N-FET is pulled high, a second path to ground is opened. The two 10k resistors divide the P-FET's input voltage to 12V, allowing current to flow through from the P-FET's source to drain.
 
-**Total time spent: 2h 30min**
+Each pump needs a pressure sensor to detect whether a part has been picked up. I chose the 2SMPP-02, which outputs an analog signals. Since the resolution of the Pico's ADC is insufficient, an external ADC will be added to the pneumatics board. Lastly, the input current to the pressure sensor must be limited, so I used the LM334 current limiting IC along with a resistor to do this.
+
+![](https://fabricate.hackclub-assets.com/e3e979ca53d4880590d14602f3ecc676f00f7ca92f53d3a821a91ca605fc12f4/image-png/Screenshot%202026-11-15%20020413.png)
+![](https://fabricate.hackclub-assets.com/54d716176127be69b9f2b78c8abf2326da3688bef47609d7133f5d547068c644/image-png/Screenshot%202026-11-19%20123821.png)
+![](https://fabricate.hackclub-assets.com/dde145355555c1e2e830e3507adeb41cb149a1b3a7d8cb3cabd7e17c57ee092c/image-png/Screenshot%202026-11-19%20123835.png)
+
+**Total time spent: 3h 30m**
 
 # November 2, 2026 (entry 2): PCB routing part 1
 <!-- fabricate:entry 1848 -->
@@ -125,3 +132,24 @@ Now, it is time to start working on the pneumatics board. This board has 4 of th
 ![](https://fabricate.hackclub-assets.com/80c18432bde949ece805bd8c5b440ff1d0bb07df649b4872c77304c8e26ddfd5/image-png/image.png)
 
 **Total time spent: 1h 30m**
+
+# November 19, 2026: PCB routing part 5
+<!-- fabricate:entry 3471 -->
+
+Routed the rest of the pneumatics board, including the pressure sensors, the ADC and the ESD protection ICs. Added connectors and traces to distribute power to the gate driver circuits, which were sized accordingly.
+
+![](https://fabricate.hackclub-assets.com/17cd4456091cbf863d92b716f5945a67113f19cd52a6bb579742740844e9e39e/image-png/image.png)
+
+**Total time spent: 2h 30m**
+
+# November 19, 2026 (entry 2): Widened traces and ran DRC
+<!-- fabricate:entry 3474 -->
+
+When routing the pneumatics board, I used an online calculator to find how wide my traces needed to be, based on the trip current for the board's fuse. I realized that the +24V trace on the Pico board was too narrow, so I widened it by shifting the stepper motor drivers downwards to make more space for the trace, and tapering the traces at the first few pads as it was too wide.
+
+After that, I ran DRC and corrected the errors. Most errors were interference errors caused by footprints being too close to each other or traces. There is a clearance error regarding the LTC4368CMS which can't be fixed as its pads are closer together than the KiCad default clearance (0.15mm vs 0.2mm). JLCPCB's minimum clearance is 0.15mm, so this should still be manufacturable.
+
+![](https://fabricate.hackclub-assets.com/28899e5c3e5131ee046c1c4f889ee1ed6e2b1f1704f6095633cc99069f8cdfad/image-png/image.png)
+
+**Total time spent: 1h 30m**
+
