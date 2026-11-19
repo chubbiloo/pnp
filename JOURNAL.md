@@ -133,7 +133,7 @@ Now, it is time to start working on the pneumatics board. This board has 4 of th
 
 **Total time spent: 1h 30m**
 
-# November 19, 2026: PCB routing part 5
+# November 18, 2026: PCB routing part 5
 <!-- fabricate:entry 3471 -->
 
 Routed the rest of the pneumatics board, including the pressure sensors, the ADC and the ESD protection ICs. Added connectors and traces to distribute power to the gate driver circuits, which were sized accordingly.
@@ -142,7 +142,7 @@ Routed the rest of the pneumatics board, including the pressure sensors, the ADC
 
 **Total time spent: 2h 30m**
 
-# November 19, 2026 (entry 2): PCB routing part 6
+# November 18, 2026 (entry 2): PCB routing part 6
 <!-- fabricate:entry 3476 -->
 
 Routed the power board. Due to the high fuse current of 7.5A, I used pours instead of traces for the main power rail. I realized that my shunt resistor and ferrite beads were too small to carry enough current, so I selected larger parts, a 2512 for the resistor and 1612 for the bead. I found that I had missed a decimal place when calculating the shunt's resistance, it should be 0.006 not 0.062 ohms.
@@ -151,7 +151,7 @@ Routed the power board. Due to the high fuse current of 7.5A, I used pours inste
 
 **Total time spent: 2h**
 
-# November 19, 2026 (entry 3): Widened traces and ran DRC
+# November 19, 2026: Widened traces and ran DRC
 <!-- fabricate:entry 3474 -->
 
 When routing the pneumatics and power boards, I used an online calculator to find how wide my traces needed to be, based on the trip current for the board's fuse. I realized that the +24V trace on the Pico board was too narrow, so I widened it by shifting the stepper motor drivers downwards to make more space for the trace, and tapering the traces at the first few pads as it was too wide.
@@ -162,7 +162,7 @@ After that, I ran DRC and corrected the errors. Most errors were interference er
 
 **Total time spent: 1h 30m**
 
-# November 19, 2026 (entry 4): Started frame CAD
+# November 19, 2026 (entry 2): Started frame CAD
 <!-- fabricate:entry 3478 -->
 
 Decided to use 2040 extrusion for the frame. Imported a profile for the extrusion, and cadded frame. Using a variable studio to keep the frame parametric. Also imported some other parts (stepper, brackets, GT2 pulley and parametric linear rails).
